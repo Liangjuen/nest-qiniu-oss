@@ -1,0 +1,11 @@
+dist/*
+.local
+.output.js
+/node_modules/**
+/public/*
+*.json
+
+# 配置
+/config/development.yaml
+/config/test.yaml
+/config/production.yaml

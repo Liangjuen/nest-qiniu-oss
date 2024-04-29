@@ -1,0 +1,9 @@
+dist/
+node_modules/
+env/
+logs/
+
+# 配置
+/config/development.yaml
+/config/test.yaml
+/config/production.yaml
