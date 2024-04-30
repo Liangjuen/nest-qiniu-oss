@@ -12,7 +12,8 @@ npm i nest-qiniu-oss
 // upload.module.ts
 import { Module } from '@nestjs/common'
 import { UploadController } from './upload.controller'
-import { QiniuOSSModule, QiniuOSSService } from 'qiniu'
+import { conf } from 'qiniu'
+import { QiniuOSSModule, QiniuOSSService } from 'nest-qiniu-oss'
 
 @Module({
 	imports: [
@@ -25,8 +26,11 @@ import { QiniuOSSModule, QiniuOSSService } from 'qiniu'
 			bucket: 'bucket',
             // 域名配置
             domain: 'http://bucket.test',
-            // 存储区域编码
-            zone: 'z2',
+            // 存储区域编码 官方不推荐使用(已弃用)
+            // zone: conf.Zone,
+			// 存储区域 'z0' | 'cn-east-2' | 'z1' | 'z2' | 'na0' | 'as0' | 'ap-southeast-2'
+			// 查看: https://developer.qiniu.com/kodo/1671/region-endpoint-fq
+			region: 'z0'
             // 注册为 nest 应用的全局模块
 			global: true
 		})
@@ -45,7 +49,8 @@ export class UploadModule {}
 // upload.module.ts
 import { Module } from '@nestjs/common'
 import { UploadController } from './upload.controller'
-import { QiniuOSSModule, QiniuOSSService } from 'qiniu'
+import { conf } from 'qiniu'
+import { QiniuOSSModule, QiniuOSSService } from 'nest-qiniu-oss'
 
 @Module({
 	imports: [
@@ -61,7 +66,7 @@ import { QiniuOSSModule, QiniuOSSService } from 'qiniu'
 			    secretKey: 'your qiniu secretKey',
 			    bucket: 'bucket',
 			    domain: 'http://bucket.test',
-			    zone: 'z2',
+				region: 'z0'
 			    global: true
 			}
 			}
@@ -72,5 +77,33 @@ import { QiniuOSSModule, QiniuOSSService } from 'qiniu'
 	exports: []
 })
 export class UploadModule {}
+```
+
+### service
+
+``` ts
+import { Injectable } from '@nestjs/common'
+import { QiniuOSSService } from 'nest-qiniu-oss'
+
+@Injectable()
+export class UploadService {
+	constructor(private readonly qiniuOSSService: QiniuOSSService) {}
+
+	getUploadToken() {
+		// 创建鉴权对象
+		const mac = this.qiniuOSSService.mac()
+
+		// 创建配置
+		const conf = this.qiniuOSSService.createConfig()
+
+		// 创建上传策略
+		const putPolicy = this.qiniuOSSService.createPutPolicy({
+			scope: this.qiniuOSSService.options.bucket
+		})
+
+		// 创建上传凭证
+		return putPolicy.uploadToken(mac)
+	}
+}
 ```
 
