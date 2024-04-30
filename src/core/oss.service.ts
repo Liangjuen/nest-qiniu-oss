@@ -65,7 +65,7 @@ export class QiniuOSSService {
 
 	/**
 	 * @description 创建上传 token
-	 * @see [](https://developer.qiniu.com/kodo/1208/upload-token)
+	 * @see https://developer.qiniu.com/kodo/1208/upload-token
 	 * @param options [上传策略配置](https://developer.qiniu.com/kodo/1206/put-policy)
 	 * @returns
 	 */
