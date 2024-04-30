@@ -53,17 +53,17 @@ import { QiniuOSSModule, QiniuOSSService } from 'qiniu'
 			imports: [],
 			useFactory: () => {
 
-                // do some thing ...
-                // 一般在此之前通过注入 configService 加载配置
+			// do some thing ...
+			// 一般在此之前通过注入 configService 加载配置
 
-				return {
-                    accessKey: 'your qiniu accessKey',
-                    secretKey: 'your qiniu secretKey',
-                    bucket: 'bucket',
-                    domain: 'http://bucket.test',
-                    zone: 'z2',
-                    global: true
-				}
+			return {
+			    accessKey: 'your qiniu accessKey',
+			    secretKey: 'your qiniu secretKey',
+			    bucket: 'bucket',
+			    domain: 'http://bucket.test',
+			    zone: 'z2',
+			    global: true
+			}
 			}
 		})
 	],
