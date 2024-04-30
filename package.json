@@ -1,6 +1,6 @@
 {
   "name": "nest-qiniu-oss",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "nest 七牛云 oss 插件",
   "repository": {
     "type": "git",
