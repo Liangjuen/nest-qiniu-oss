@@ -9,7 +9,6 @@ import { QiniuOSSModuleOptions, Region } from '../interfaces'
 @Injectable()
 export class QiniuOSSService {
 	constructor(
-		@Optional()
 		@Inject(QINIU_OSS_MODULE_OPTIONS)
 		private readonly qiniuOSSOptions: QiniuOSSModuleOptions
 	) {}

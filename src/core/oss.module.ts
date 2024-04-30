@@ -30,7 +30,8 @@ export class QiniuOSSModule {
 			module: QiniuOSSModule,
 			global: options.global,
 			imports: options.imports || [],
-			providers: this.createAsyncProviders(options)
+			providers: [...this.createAsyncProviders(options)],
+			exports: [QINIU_OSS_MODULE_OPTIONS]
 		}
 	}
 
